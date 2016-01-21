@@ -1,0 +1,16 @@
+html{
+
+}
+
+body{
+
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: rgb(200, 200, 200);
+  color: rgb(138, 135, 135);
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="reddit-clone">
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Clone</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <header>
+      <h1>Reddit Clone</h1>
+      <h2>+ Submit Post</h2>
+      <input type="text" ng-model="search" placeholder="Search">
+      <select ng-model="sort">
+        <option value="votes">
+          votes
+        </option>
+        <option value="date">
+          date
+        </option>
+      </select>
+    </header>
+
+  </body>
+</html>
