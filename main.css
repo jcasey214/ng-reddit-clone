@@ -29,6 +29,7 @@ header{
   flex-direction: column;
 }
 
+
 .input input{
   width: 100%;
   display: block;
@@ -71,3 +72,64 @@ main{
 div.image{
   margin: 10px 20px 10px 10px;
 }
+
+.postive{
+  color: green;
+}
+
+.negative{
+  color: red;
+}
+/*
+.ng-enter{
+  transition: 3s ease all;
+  opacity: 0;
+}
+
+.ng-enter-active{
+  opacity: 1;
+}
+
+.ng-leave{
+  transition: 3s ease all;
+  opacity: 1;
+}
+
+.ng-leave-active{
+  opacity: 0;
+}
+
+.ng-hide-remove{
+  transition: 3s ease all;
+  opacity: 0;
+}
+
+.ng-hide-remove-active{
+  opacity: 1;
+}*/
+
+.ng-enter {
+  /*transition:2s linear all;
+  opacity:0;*/
+  animation: fadeIn 1s;
+}
+
+.ng-hide-remove {
+  animation:  fadeIn 1s;
+}
+
+.ng-hide-add {
+  animation: fadeOut 1s;
+}
+
+.ng-leave {
+  animation: fadeOut 1s;
+}
+
+
+
+/*This is for our hiding (this is not a class from ng-animate)*/
+/*.ng-hide {
+  transition:0.5s linear all;
+  opacity:0;
+}*/

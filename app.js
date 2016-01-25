@@ -1,4 +1,4 @@
-var app = angular.module('reddit-clone', ['angularMoment']);
+var app = angular.module('reddit-clone', ['angularMoment', 'ngAnimate']);
 var today = new Date();
 
 
@@ -10,8 +10,8 @@ var redditPosts = [{
   description: 'adorable puppies do adorable things' ,
    date: today - 10000 ,
    upvotes:0,
-   comments: [{author: 'jon', text: 'fuck yeah'}, {author: 'casey', text: 'nooooooo'}],
-   commentsVisible: false,
+   comments: [{author: 'jon', text: 'yes'}, {author: 'casey', text: 'nooooooo'}],
+  //  commentsVisible: false,
    commentFormVisible: false
  },{
    title:'All done with his puppy vaccinations!' ,
@@ -21,7 +21,7 @@ var redditPosts = [{
    date: today - 500 ,
    upvotes:0,
    comments: [{author: 'jon', text: 'i like turtles' }],
-   commentsVisible: false,
+  //  commentsVisible: false,
    commentFormVisible: false
  }, {
    title:'I get woken up every morning by this cute girl' ,
@@ -31,7 +31,7 @@ var redditPosts = [{
     date: today - 100000000000 ,
     upvotes:0,
    comments: [{author: 'jon', text: 'best dog ever'},{author: 'casey', text: 'not a dog, genius'} ],
-   commentsVisible: false,
+  //  commentsVisible: false,
    commentFormVisible: false
   }, {
     title:'When giving your dog a bath turns into a Sarah McLachlan commercial' ,
@@ -41,7 +41,7 @@ var redditPosts = [{
      date: today - 30000 ,
      upvotes:0,
      comments: [],
-     commentsVisible: false,
+    //  commentsVisible: false,
      commentFormVisible: false }];
 
 
@@ -67,12 +67,17 @@ app.controller('reddit', function($scope){
             $scope.image = '';
             $scope.description = '';
         }
+        $scope.inputHidden = true;
     };
   $scope.toggleInput = function(){
     $scope.inputHidden = !$scope.inputHidden;
   };
   $scope.toggleComments = function(post){
-    post.commentsVisible = !post.commentsVisible;
+    if(!post.hasOwnProperty('commentsVisible')){
+      post.commentsVisible = false;
+    }else{
+      post.commentsVisible = !post.commentsVisible;
+    }
   };
   $scope.toggleCommentForm = function(post){
     post.commentFormVisible = !post.commentFormVisible;
@@ -83,5 +88,8 @@ app.controller('reddit', function($scope){
     console.log(this.newComment);
     // console.log('post', $scope.commentform.newComment);
     post.comments.push({author: this.commentAuthor, text: this.newComment});
+    this.commentAuthor = '';
+    this.newComment = '';
+    post.commentFormVisible = false;
   };
 });

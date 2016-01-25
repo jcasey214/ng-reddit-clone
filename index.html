@@ -8,6 +8,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.0-beta.3/angular-moment.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
   </head>
   <body ng-controller="reddit">
@@ -18,10 +20,13 @@
         <input type="text" ng-model="search" placeholder="Search">
         <select ng-model="sort">
           <option value="upvotes" selected>
-            votes
+            Votes
           </option>
           <option value="date">
-            date
+            Date
+          </option>
+          <option value="title">
+            Title
           </option>
         </select>
       </div>
@@ -48,15 +53,15 @@
         <div class="details">
           <h2>{{post.title}}</h2>
           <h3>{{post.author}}</h3>
-          <h4><i ng-click="post.upvotes = post.upvotes + 1"class='fa fa-arrow-down'></i>  <i ng-click="post.upvotes = post.upvotes - 1" class='fa fa-arrow-up'></i>  {{post.upvotes}}</h4>
+          <h4><i ng-click="post.upvotes = post.upvotes - 1"class='fa fa-arrow-down'></i>  <i ng-click="post.upvotes = post.upvotes + 1" class='fa fa-arrow-up'></i>  <span ng-class="{'postive': post.upvotes > 0, 'negative': post.upvotes < 0}">{{post.upvotes}}</span></h4>
           <p>
             {{post.description}}
           </p>
           <p>
-            <span am-time-ago="post.date"></span>
+            <!-- <span am-time-ago="post.date"></span> -->
+            {{post.date | amTimeAgo}}
           </p>
           <p ng-click="toggleComments(post)">
-            <!-- {{post.comments.length}} Comments -->
             <ng-pluralize count="post.comments.length" when="{'0': 'No Comments Yet', '1': '1 Comment', 'other': '{} Comments'}"></ng-pluralize>
           </p>
           <p ng-click="toggleCommentForm(post)">
