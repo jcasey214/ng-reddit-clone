@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Reddit Clone</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.0-beta.3/angular-moment.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.0-beta.3/angular-moment.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="main.css">
@@ -29,7 +29,7 @@
         <form action="#" name="newPost">
           <label for="title">Title</label>
           <input type="text" name="title" id="title" required ng-model="title">
-          <label for="author">Authore</label>
+          <label for="author">Author</label>
           <input type="text" name="author" id="author" required ng-model="author">
           <label for="description">Description</label>
           <textarea type="text" name="description" id="description" required ng-model="description"></textarea>
@@ -53,20 +53,36 @@
             {{post.description}}
           </p>
           <p>
-            {{post.date | date }}
+            <span am-time-ago="post.date"></span>
           </p>
           <p ng-click="toggleComments(post)">
-            {{post.comments.length}} Comments
+            <!-- {{post.comments.length}} Comments -->
+            <ng-pluralize count="post.comments.length" when="{'0': 'No Comments Yet', '1': '1 Comment', 'other': '{} Comments'}"></ng-pluralize>
+          </p>
+          <p ng-click="toggleCommentForm(post)">
+            Add a Comment
           </p>
         </div>
         </div>
-        <div ng-repeat="comment in post.comments" class="comments" ng-hide='commentsHidden'>
-          <p>
-            {{comment}}
-          </p>
+        <div  class="comments" ng-show="post.commentsVisible">
+          <div ng-repeat="comment in post.comments" class="comments">
+            <p>
+              {{comment.author}} : {{comment.text}}
+            </p>
+          </div>
+        </div>
+        <div class="comments" ng-show="post.commentFormVisible">
+          <div>
+            <form action="#" name="commentform">
+              <label for ="newComment">Comment on this post</label>
+              <input type="text" ng-model="newComment" name="newComment" id="newComment">
+              <label for ="commentAuthor">Author</label>
+              <input type="text" ng-model="commentAuthor" name="commentAuthor" id="commentAuthor">
+              <button type="button" ng-click="addComment(post, $scope)">Comment</button>
+            </form>
+          </div>
         </div>
       </div>
     </main>
-    <script src="filters.js"></script>
   </body>
 </html>
